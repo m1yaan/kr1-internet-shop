@@ -2,16 +2,16 @@ const express = require('express');
 const { nanoid } = require('nanoid');
 const router = express.Router();
 let products = [
-  { id: nanoid(8), name: 'Смартфон Galaxy S23', category: 'Электроника', description: 'Флагманский смартфон с отличной камерой', price: 69990, stock: 12, rating: 4.7, imageUrl: 'https://via.placeholder.com/200x200?text=Phone' },
-  { id: nanoid(8), name: 'Ноутбук MacBook Air', category: 'Электроника', description: 'Легкий и мощный ноутбук для работы', price: 89990, stock: 8, rating: 4.9, imageUrl: 'https://via.placeholder.com/200x200?text=Laptop' },
-  { id: nanoid(8), name: 'Наушники Sony WH-1000XM5', category: 'Аудио', description: 'Беспроводные наушники с шумоподавлением', price: 29990, stock: 20, rating: 4.8, imageUrl: 'https://via.placeholder.com/200x200?text=Headphones' },
-  { id: nanoid(8), name: 'Умные часы Apple Watch', category: 'Электроника', description: 'Смарт-часы с отслеживанием здоровья', price: 39990, stock: 10, rating: 4.6, imageUrl: 'https://via.placeholder.com/200x200?text=Watch' },
-  { id: nanoid(8), name: 'Футболка хлопковая', category: 'Одежда', description: 'Качественная хлопковая футболка', price: 1990, stock: 50, rating: 4.3, imageUrl: 'https://via.placeholder.com/200x200?text=TShirt' },
-  { id: nanoid(8), name: 'Кроссовки Nike Air', category: 'Обувь', description: 'Спортивные кроссовки для бега', price: 7990, stock: 25, rating: 4.5, imageUrl: 'https://via.placeholder.com/200x200?text=Shoes' },
-  { id: nanoid(8), name: 'Книга "JavaScript для профессионалов"', category: 'Книги', description: 'Углубленное руководство по JavaScript', price: 1500, stock: 30, rating: 4.9, imageUrl: 'https://via.placeholder.com/200x200?text=Book' },
-  { id: nanoid(8), name: 'Кофеварка DeLonghi', category: 'Дом', description: 'Автоматическая кофеварка', price: 24990, stock: 5, rating: 4.7, imageUrl: 'https://via.placeholder.com/200x200?text=Coffee' },
-  { id: nanoid(8), name: 'Игровая мышь Logitech', category: 'Компьютеры', description: 'Игровая мышь с подсветкой', price: 3990, stock: 18, rating: 4.4, imageUrl: 'https://via.placeholder.com/200x200?text=Mouse' },
-  { id: nanoid(8), name: 'Рюкзак городской', category: 'Аксессуары', description: 'Вместительный рюкзак для повседневной носки', price: 3490, stock: 22, rating: 4.2, imageUrl: 'https://via.placeholder.com/200x200?text=Backpack' }
+  { id: nanoid(8), name: 'Смартфон Galaxy S23', category: 'Электроника', description: 'Флагманский смартфон с отличной камерой', price: 69990, stock: 12, rating: 4.7, imageUrl: '' },
+  { id: nanoid(8), name: 'Ноутбук MacBook Air', category: 'Электроника', description: 'Легкий и мощный ноутбук для работы', price: 89990, stock: 8, rating: 4.9, imageUrl: '' },
+  { id: nanoid(8), name: 'Наушники Sony WH-1000XM5', category: 'Аудио', description: 'Беспроводные наушники с шумоподавлением', price: 29990, stock: 20, rating: 4.8, imageUrl: '' },
+  { id: nanoid(8), name: 'Умные часы Apple Watch', category: 'Электроника', description: 'Смарт-часы с отслеживанием здоровья', price: 39990, stock: 10, rating: 4.6, imageUrl: '' },
+  { id: nanoid(8), name: 'Футболка хлопковая', category: 'Одежда', description: 'Качественная хлопковая футболка', price: 1990, stock: 50, rating: 4.3, imageUrl: '' },
+  { id: nanoid(8), name: 'Кроссовки Nike Air', category: 'Обувь', description: 'Спортивные кроссовки для бега', price: 7990, stock: 25, rating: 4.5, imageUrl: '' },
+  { id: nanoid(8), name: 'Книга "JavaScript для профессионалов"', category: 'Книги', description: 'Углубленное руководство по JavaScript', price: 1500, stock: 30, rating: 4.9, imageUrl: '' },
+  { id: nanoid(8), name: 'Кофеварка DeLonghi', category: 'Дом', description: 'Автоматическая кофеварка', price: 24990, stock: 5, rating: 4.7, imageUrl: '' },
+  { id: nanoid(8), name: 'Игровая мышь Logitech', category: 'Компьютеры', description: 'Игровая мышь с подсветкой', price: 3990, stock: 18, rating: 4.4, imageUrl: '' },
+  { id: nanoid(8), name: 'Рюкзак городской', category: 'Аксессуары', description: 'Вместительный рюкзак для повседневной носки', price: 3490, stock: 22, rating: 4.2, imageUrl: '' }
 ];
 
 function findProductOr404(id, res) {
