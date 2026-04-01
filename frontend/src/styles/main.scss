@@ -1,0 +1,397 @@
+// ========== ПЕРЕМЕННЫЕ (ПР1) ==========
+$primary-color: #6366f1;
+$primary-dark: #4f46e5;
+$danger-color: #ef4444;
+$danger-dark: #dc2626;
+$success-color: #10b981;
+$warning-color: #f59e0b;
+$dark-bg: #0f172a;
+$dark-card: #1e293b;
+$text-light: #f1f5f9;
+$text-muted: #94a3b8;
+$border-color: #334155;
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 992px;
+
+@mixin card {
+  background: $dark-card;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-base($bg, $bg-hover) {
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $border-radius-md;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: $bg;
+  color: white;
+  
+  &:hover {
+    background: $bg-hover;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+@mixin media-mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: $dark-bg;
+  color: $text-light;
+  line-height: 1.5;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: linear-gradient(135deg, $primary-color, $primary-dark);
+  padding: $spacing-xl 0;
+  margin-bottom: $spacing-xl;
+  
+  &__inner {
+    @include container;
+    text-align: center;
+  }
+  
+  &__title {
+    font-size: 2rem;
+    margin-bottom: $spacing-sm;
+    
+    @include media-mobile {
+      font-size: 1.5rem;
+    }
+  }
+  
+  &__subtitle {
+    opacity: 0.9;
+  }
+}
+
+
+.main {
+  flex: 1;
+  
+  .container {
+    @include container;
+  }
+}
+
+.footer {
+  background: $dark-card;
+  padding: $spacing-lg 0;
+  margin-top: $spacing-xl;
+  text-align: center;
+  border-top: 1px solid $border-color;
+  
+  &__inner {
+    @include container;
+    opacity: 0.7;
+    font-size: 0.875rem;
+  }
+}
+
+.btn {
+  &--primary {
+    @include button-base($primary-color, $primary-dark);
+  }
+  
+  &--edit {
+    @include button-base($warning-color, darken($warning-color, 10%));
+  }
+  
+  &--delete {
+    @include button-base($danger-color, $danger-dark);
+  }
+  
+  &--cancel {
+    @include button-base($border-color, lighten($border-color, 10%));
+  }
+}
+
+.product-list {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    
+    @include media-mobile {
+      flex-direction: column;
+      align-items: stretch;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+  
+  &__title {
+    font-size: 1.5rem;
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: $spacing-lg;
+  
+  @include media-tablet {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+.product-card {
+  @include card;
+  
+  &__image {
+    height: 200px;
+    @include flex-center;
+    background: lighten($dark-card, 5%);
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  &__placeholder {
+    font-size: 3rem;
+  }
+  
+  &__content {
+    padding: $spacing-md;
+  }
+  
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__category {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: rgba($primary-color, 0.2);
+    color: $primary-color;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__description {
+    font-size: 0.875rem;
+    color: $text-muted;
+    margin: $spacing-sm 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  &__footer {
+    display: flex;
+    gap: $spacing-md;
+    margin: $spacing-md 0;
+    flex-wrap: wrap;
+  }
+  
+  &__price {
+    font-weight: 700;
+    color: $primary-color;
+    font-size: 1.25rem;
+  }
+  
+  &__stock {
+    font-size: 0.875rem;
+    color: $text-muted;
+  }
+  
+  &__rating {
+    font-size: 0.875rem;
+    color: $warning-color;
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
+    
+    button {
+      flex: 1;
+      text-align: center;
+    }
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  @include flex-center;
+  z-index: 1000;
+  padding: $spacing-md;
+}
+
+.modal {
+  background: $dark-card;
+  border-radius: $border-radius-lg;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  &__title {
+    font-size: 1.25rem;
+  }
+  
+  &__close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $text-muted;
+    
+    &:hover {
+      color: $text-light;
+    }
+  }
+  
+  &__form {
+    padding: $spacing-lg;
+  }
+  
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-md;
+    margin-top: $spacing-lg;
+  }
+}
+
+
+.form-group {
+  margin-bottom: $spacing-md;
+  
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: lighten($dark-card, 5%);
+    border: 1px solid $border-color;
+    border-radius: $border-radius-md;
+    color: $text-light;
+    font-family: inherit;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+  
+  @include media-mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.loading, .error, .empty-state {
+  text-align: center;
+  padding: $spacing-xl;
+  color: $text-muted;
+}
+
+.error {
+  color: $danger-color;
+}
